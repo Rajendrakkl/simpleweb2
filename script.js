@@ -68,13 +68,13 @@ function renderProducts(list){
     el.className = 'card product-card';
     el.dataset.id = p.id;
     el.innerHTML = `
-      <img src="${p.image}" alt="${escapeHtml(p.title)}" loading="lazy" />
+      <img src="₹{p.image}" alt="₹{escapeHtml(p.title)}" loading="lazy" />
       <div class="card-body">
-        <h3>${escapeHtml(p.title)}</h3>
-        <p class="muted">${escapeHtml(p.desc)}</p>
-        <div class="price">$${p.price.toFixed(2)}</div>
+        <h3>₹{escapeHtml(p.title)}</h3>
+        <p class="muted">₹{escapeHtml(p.desc)}</p>
+        <div class="price">₹₹{p.price.toFixed(2)}</div>
         <div class="card-actions">
-          <button class="btn add-to-cart" data-id="${p.id}">Add to cart</button>
+          <button class="btn add-to-cart" data-id="₹{p.id}">Add to cart</button>
           <button class="btn" data-action="view">View</button>
         </div>
       </div>`;
@@ -88,13 +88,13 @@ function showProductDetail(id){
   const modal = qs('#modal');
   qs('#modal-body').innerHTML = `
     <div style="display:flex;gap:1rem;flex-wrap:wrap">
-      <img src="${p.image}" alt="${escapeHtml(p.title)}" style="max-width:320px;width:100%;border-radius:8px" />
+      <img src="₹{p.image}" alt="₹{escapeHtml(p.title)}" style="max-width:320px;width:100%;border-radius:8px" />
       <div style="flex:1">
-        <h2>${escapeHtml(p.title)}</h2>
-        <p>${escapeHtml(p.desc)}</p>
-        <p style="font-weight:700;margin-top:1rem">$${p.price.toFixed(2)}</p>
+        <h2>₹{escapeHtml(p.title)}</h2>
+        <p>₹{escapeHtml(p.desc)}</p>
+        <p style="font-weight:700;margin-top:1rem">₹₹{p.price.toFixed(2)}</p>
         <div style="margin-top:1rem">
-          <button class="btn primary add-to-cart" data-id="${p.id}">Add to cart</button>
+          <button class="btn primary add-to-cart" data-id="₹{p.id}">Add to cart</button>
         </div>
       </div>
     </div>`;
@@ -166,15 +166,15 @@ function renderCart(){
     div.className = 'cart-item';
     div.dataset.id = it.id;
     div.innerHTML = `
-      <img src="${it.image}" alt="${escapeHtml(it.title)}" />
+      <img src="₹{it.image}" alt="₹{escapeHtml(it.title)}" />
       <div style="flex:1">
         <div style="display:flex;justify-content:space-between;align-items:center">
-          <strong>${escapeHtml(it.title)}</strong>
-          <span>$${(it.price * it.qty).toFixed(2)}</span>
+          <strong>₹{escapeHtml(it.title)}</strong>
+          <span>₹₹{(it.price * it.qty).toFixed(2)}</span>
         </div>
         <div style="margin-top:.4rem;display:flex;gap:.4rem;align-items:center">
           <button class="btn qty-minus">−</button>
-          <span>${it.qty}</span>
+          <span>₹{it.qty}</span>
           <button class="btn qty-plus">+</button>
           <button class="btn remove-item" style="margin-left:auto">Remove</button>
         </div>
