@@ -1,57 +1,42 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>About - SimpleWeb</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Madhurai Masala & Spices</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="header">
-    <div class="header-inner">
-      <a class="brand" href="index.html">
-        <span class="logo">SW</span>
-        <span class="site-title">SimpleWeb</span>
-      </a>
-      <nav class="nav" aria-label="Primary">
-        <button class="nav-toggle" aria-controls="primary-menu" aria-expanded="false">
-          <span class="bar" aria-hidden="true"></span>
-        </button>
-        <div id="primary-menu" class="nav-menu">
-          <a class="nav-link" href="index.html">Home</a>
-          <a class="nav-link active" href="about.html">About</a>
-          <a class="nav-link" href="shop.html">Shop</a>
-          <a class="nav-link" href="contact.html">Contact</a>
-        </div>
+  <header class="site-header">
+    <div class="container header-inner">
+      <h1 class="logo"><a href="index.html">Madhurai Masala & Spices</a></h1>
+      <nav class="main-nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="shop.html">Shop</a>
+        <a href="contact.html">Contact</a>
       </nav>
+      <div class="search-cart">
+        <input id="search" class="search" type="search" placeholder="Search products..." />
+        <button id="cart-toggle" class="cart-btn">Cart (<span id="cart-count">0</span>)</button>
+      </div>
     </div>
   </header>
 
   <main class="container">
-    <section>
-      <h1>About SimpleWeb</h1>
-      <p class="small">We build small, focused front-end templates that help teams ship faster. Our components are lightweight, accessible, and easy to adapt.</p>
+    <h2>Madhurai Masala & Spices</h2>
+    <p>Simple Shop is a minimal static e‑commerce demo built to demonstrate a no‑build static website with a JavaScript powered shopping cart. This site is intended for learning and prototyping.</p>
 
-      <div class="grid" style="margin-top:1.5rem">
-        <div class="card">
-          <h3>Our Approach</h3>
-          <p>Design systems should be pragmatic — reusable styles and components without unnecessary complexity.</p>
-        </div>
-        <div class="card">
-          <h3>Open Source</h3>
-          <p>We welcome contributions and encourage experimentation. Fork, customize, and share what you build.</p>
-        </div>
-        <div class="card">
-          <h3>Support</h3>
-          <p>Contact us for partnership or custom theming options that match your brand.</p>
-        </div>
-      </div>
-    </section>
+    <h3>Our Mission</h3>
+    <p>To provide a tiny, approachable e‑commerce starter that works without build tooling and can easily be extended.</p>
+
+    <h3>Contribute</h3>
+    <p>Fork the repository and send a pull request — or tell me what features you want and I can add them.</p>
   </main>
 
-  <footer class="footer">
+  <footer class="site-footer">
     <div class="container">
-      <div class="small">© 2025 SimpleWeb</div>
+      <small>Simple Shop — demo e‑commerce (static)</small>
     </div>
   </footer>
 
