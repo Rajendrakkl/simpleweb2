@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contact - Simple Shop</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <h1 class="logo"><a href="index.html">Simple Shop</a></h1>
+      <nav class="main-nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="shop.html">Shop</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="search-cart">
+        <input id="search" class="search" type="search" placeholder="Search products..." />
+        <button id="cart-toggle" class="cart-btn">Cart (<span id="cart-count">0</span>)</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <h2>Contact Us</h2>
+    <p>If you have questions or suggestions, send us a message using the form below (demo only — no server).</p>
+    <form id="contact-form" style="max-width:640px">
+      <label>Name<br><input name="name" required style="width:100%;padding:.5rem;margin-top:.25rem" /></label>
+      <label style="display:block;margin-top:.5rem">Email<br><input name="email" type="email" required style="width:100%;padding:.5rem;margin-top:.25rem" /></label>
+      <label style="display:block;margin-top:.5rem">Message<br><textarea name="message" rows="6" required style="width:100%;padding:.5rem;margin-top:.25rem"></textarea></label>
+      <div style="margin-top:.75rem">
+        <button type="submit" class="btn primary">Send (Demo)</button>
+      </div>
+    </form>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <small>Simple Shop — demo e‑commerce (static)</small>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Contact form demo behavior
+    document.getElementById('contact-form').addEventListener('submit', function(e){
+      e.preventDefault();
+      alert('Thank you — this is a demo contact form.');
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>

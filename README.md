@@ -1,19 +1,15 @@
 # Simple Shop - Static Starter
 
-A minimal static e‑commerce demo using plain HTML/CSS/JS.
+This repository contains a minimal static e‑commerce demo.
 
-Features:
-- Product listing from `products.json`
-- Product detail modal
-- Shopping cart persisted in `localStorage`
-- Demo checkout (no payments)
-- Responsive layout
+Pages added:
+- index.html (Home)
+- about.html (About Us)
+- shop.html (Shop — product listing)
+- contact.html (Contact form demo)
 
 How to run locally:
-1. Clone the repo and switch to `main` (or the branch with these files).
-2. Serve the folder with a static server (some browsers block fetch for local files):
-   - `npx http-server` or
-   - `python -m http.server`
-3. Open `http://localhost:8080` (or the port your server shows).
+1. Serve the project with a static server (e.g., `npx http-server` or `python -m http.server`).
+2. Open http://localhost:8080
 
-Edit `products.json` to add or change products.
+Notes: the shop page uses `products.json` and `script.js` for product rendering and cart functionality.
