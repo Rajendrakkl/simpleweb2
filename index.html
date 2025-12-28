@@ -48,10 +48,24 @@
     </div>
     <div id="cart-items" class="cart-items"></div>
     <div class="cart-footer">
-      <div class="cart-total">Total: $<span id="cart-total">0.00</span></div>
-      <button id="checkout-btn" class="btn primary">Checkout (Demo)</button>
-      <button id="clear-cart" class="btn">Clear</button>
-    </div>
+  <div class="cart-total">Total: $<span id="cart-total">0.00</span></div>
+
+  <div class="checkout-fields">
+    <label>
+      Phone Number
+      <input type="tel" id="checkout-phone" placeholder="Enter phone number" />
+    </label>
+
+    <label>
+      Address
+      <textarea id="checkout-address" placeholder="Enter delivery address"></textarea>
+    </label>
+  </div>
+
+  <button id="checkout-btn" class="btn primary">Checkout (Demo)</button>
+  <button id="clear-cart" class="btn">Clear</button>
+</div>
+
   </aside>
 
   <div id="modal" class="modal" aria-hidden="true">
