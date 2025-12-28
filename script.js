@@ -166,11 +166,11 @@ function renderCart(){
     div.className = 'cart-item';
     div.dataset.id = it.id;
     div.innerHTML = `
-      <img src="${it.image}" alt="${escapeHtml(it.title)}" />
+      <img src="₹{it.image}" alt="₹{escapeHtml(it.title)}" />
       <div style="flex:1">
         <div style="display:flex;justify-content:space-between;align-items:center">
-          <strong>${escapeHtml(it.title)}</strong>
-          <span>$${(it.price * it.qty).toFixed(2)}</span>
+          <strong>₹{escapeHtml(it.title)}</strong>
+          <span>₹₹{(it.price * it.qty).toFixed(2)}</span>
         </div>
         <div style="margin-top:.4rem;display:flex;gap:.4rem;align-items:center">
           <button class="btn qty-minus">−</button>
