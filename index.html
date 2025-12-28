@@ -1,79 +1,69 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>SimpleWeb - Home</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Madhurai Masala & Spices</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="header">
-    <div class="header-inner">
-      <a class="brand" href="index.html">
-        <span class="logo">SW</span>
-        <span class="site-title">SimpleWeb</span>
-      </a>
-
-      <nav class="nav" aria-label="Primary">
-        <button class="nav-toggle" aria-controls="primary-menu" aria-expanded="false">
-          <span class="bar" aria-hidden="true"></span>
-          <span class="sr-only">Toggle navigation</span>
-        </button>
-        <div id="primary-menu" class="nav-menu">
-          <a class="nav-link active" href="index.html">Home</a>
-          <a class="nav-link" href="about.html">About</a>
-          <a class="nav-link" href="shop.html">Shop</a>
-          <a class="nav-link" href="contact.html">Contact</a>
-        </div>
+  <header class="site-header">
+    <div class="container header-inner">
+      <h1 class="logo"><a href="index.html">Madhurai Masala & Spices</a></h1>
+      <nav class="main-nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="shop.html">Shop</a>
+        <a href="contact.html">Contact</a>
       </nav>
+      <div class="search-cart">
+        <input id="search" class="search" type="search" placeholder="Search products..." />
+        <button id="cart-toggle" class="cart-btn">Cart (<span id="cart-count">0</span>)</button>
+      </div>
     </div>
   </header>
 
   <main class="container">
-    <section class="hero">
-      <div class="hero-left">
-        <h1 class="hero-title">A clean, modern starting point for your site</h1>
-        <p class="hero-sub">Refresh your UI with simple, responsive components — cards, navigation, and layout that scale from mobile to desktop.</p>
-        <a class="hero-cta" href="shop.html">Explore products</a>
+    <section class="hero" style="padding:2rem 0;display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap">
+      <div style="flex:1;min-width:260px">
+        <h2>Welcome to Organic Madhurai Masala & Spices</h2>
+        <p>Browse products, add to cart, and checkout.</p>
+        <p><a href="shop.html" class="btn primary">Start Shopping</a></p>
       </div>
-      <div class="hero-visual">
-        <p style="margin:0;font-weight:600">Featured</p>
-        <div style="margin-top:0.75rem;display:grid;grid-template-columns:1fr 1fr;gap:0.6rem">
-          <div style="background:rgba(255,255,255,0.03);padding:0.6rem;border-radius:8px">Item A</div>
-          <div style="background:rgba(255,255,255,0.03);padding:0.6rem;border-radius:8px">Item B</div>
-          <div style="grid-column:1 / -1;background:linear-gradient(90deg,var(--accent),var(--accent-2));padding:0.6rem;border-radius:8px;color:#021018">Special Offer</div>
-        </div>
+      <div style="flex:1;min-width:260px">
+        <img src="https://picsum.photos/seed/hero/800/400" alt="Shop hero" style="width:100%;border-radius:10px;" />
       </div>
     </section>
 
     <section>
-      <h2 style="margin-top:0.25rem">Popular picks</h2>
-      <div class="grid" aria-live="polite">
-        <article class="card">
-          <h3>Product One</h3>
-          <p>Clean design, fast performance and a small footprint — works great for prototypes and small projects.</p>
-          <div class="meta">From $19 — 4.8 ★</div>
-        </article>
-        <article class="card">
-          <h3>Product Two</h3>
-          <p>Well-documented and easy to customize. Includes components and layout patterns.</p>
-          <div class="meta">From $29 — 4.7 ★</div>
-        </article>
-        <article class="card">
-          <h3>Product Three</h3>
-          <p>Perfect for landing pages and small storefronts with minimal setup.</p>
-          <div class="meta">From $12 — 4.6 ★</div>
-        </article>
-      </div>
+      <h3>Featured Products</h3>
+      <div id="products" class="products-grid" aria-live="polite"></div>
     </section>
-
   </main>
 
-  <footer class="footer">
+  <aside id="cart" class="cart-panel" aria-hidden="true">
+    <div class="cart-header">
+      <h2>Your Cart</h2>
+      <button id="close-cart" class="close">&times;</button>
+    </div>
+    <div id="cart-items" class="cart-items"></div>
+    <div class="cart-footer">
+      <div class="cart-total">Total: $<span id="cart-total">0.00</span></div>
+      <button id="checkout-btn" class="btn primary">Checkout (Demo)</button>
+      <button id="clear-cart" class="btn">Clear</button>
+    </div>
+  </aside>
+
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="modal-content">
+      <button id="modal-close" class="close">&times;</button>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
     <div class="container">
-      <div class="row" style="justify-content:center">
-        <div class="small">© 2025 SimpleWeb. Designed by SimpleWeb Team.</div>
-      </div>
+      <small>Simple Shop — demo e‑commerce (static)</small>
     </div>
   </footer>
 
