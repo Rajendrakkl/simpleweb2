@@ -1,58 +1,55 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Contact - SimpleWeb</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Madhurai Masala & Spices</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="header">
-    <div class="header-inner">
-      <a class="brand" href="index.html">
-        <span class="logo">SW</span>
-        <span class="site-title">SimpleWeb</span>
-      </a>
-      <nav class="nav" aria-label="Primary">
-        <button class="nav-toggle" aria-controls="primary-menu" aria-expanded="false">
-          <span class="bar" aria-hidden="true"></span>
-        </button>
-        <div id="primary-menu" class="nav-menu">
-          <a class="nav-link" href="index.html">Home</a>
-          <a class="nav-link" href="about.html">About</a>
-          <a class="nav-link" href="shop.html">Shop</a>
-          <a class="nav-link active" href="contact.html">Contact</a>
-        </div>
+  <header class="site-header">
+    <div class="container header-inner">
+      <h1 class="logo"><a href="index.html">Simple Shop</a></h1>
+      <nav class="main-nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="shop.html">Shop</a>
+        <a href="contact.html">Contact</a>
       </nav>
+      <div class="search-cart">
+        <input id="search" class="search" type="search" placeholder="Search products..." />
+        <button id="cart-toggle" class="cart-btn">Cart (<span id="cart-count">0</span>)</button>
+      </div>
     </div>
   </header>
 
   <main class="container">
-    <h1>Contact</h1>
-    <p class="small">Have questions or want to collaborate? Drop us a note.</p>
-
-    <div style="margin-top:1.25rem;max-width:640px">
-      <form>
-        <label style="display:block;margin-bottom:0.5rem">Name
-          <input style="width:100%;padding:0.6rem;border-radius:8px;border:1px solid rgba(255,255,255,0.04);margin-top:0.25rem;background:transparent;color:inherit" type="text" name="name" />
-        </label>
-        <label style="display:block;margin:0.75rem 0">Email
-          <input style="width:100%;padding:0.6rem;border-radius:8px;border:1px solid rgba(255,255,255,0.04);margin-top:0.25rem;background:transparent;color:inherit" type="email" name="email" />
-        </label>
-        <label style="display:block;margin:0.75rem 0">Message
-          <textarea style="width:100%;padding:0.6rem;border-radius:8px;border:1px solid rgba(255,255,255,0.04);margin-top:0.25rem;background:transparent;color:inherit" rows="6" name="message"></textarea>
-        </label>
-        <button style="margin-top:0.75rem;padding:0.6rem 0.9rem;border-radius:10px;border:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#021018;font-weight:600">Send</button>
-      </form>
-    </div>
+    <h2>Contact Us</h2>
+    <p>If you have questions or suggestions, send us a message using the form below (demo only — no server).</p>
+    <form id="contact-form" style="max-width:640px">
+      <label>Name<br><input name="name" required style="width:100%;padding:.5rem;margin-top:.25rem" /></label>
+      <label style="display:block;margin-top:.5rem">Email<br><input name="email" type="email" required style="width:100%;padding:.5rem;margin-top:.25rem" /></label>
+      <label style="display:block;margin-top:.5rem">Message<br><textarea name="message" rows="6" required style="width:100%;padding:.5rem;margin-top:.25rem"></textarea></label>
+      <div style="margin-top:.75rem">
+        <button type="submit" class="btn primary">Send (Demo)</button>
+      </div>
+    </form>
   </main>
 
-  <footer class="footer">
+  <footer class="site-footer">
     <div class="container">
-      <div class="small">© 2025 SimpleWeb — Contact</div>
+      <small>Simple Shop — demo e‑commerce (static)</small>
     </div>
   </footer>
 
   <script src="script.js"></script>
+  <script>
+    // Contact form demo behavior
+    document.getElementById('contact-form').addEventListener('submit', function(e){
+      e.preventDefault();
+      alert('Thank you — this is a demo contact form.');
+      e.target.reset();
+    });
+  </script>
 </body>
 </html>
