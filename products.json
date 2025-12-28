@@ -1,8 +1,8 @@
 [
   {"id":1,"title":"Pickles","price":99.99,"desc":"Raw Mango Pickles","image":"https://picsum.photos/seed/1/600/400"},
-  {"id":2,"title":"Blue Denim Jacket","price":69.00,"desc":"Stylish denim jacket for everyday wear.","image":"https://picsum.photos/seed/2/600/400"},
-  {"id":3,"title":"Sneaker Runner","price":89.99,"desc":"Lightweight running shoes with cushion.","image":"https://picsum.photos/seed/3/600/400"},
-  {"id":4,"title":"Leather Wallet","price":29.50,"desc":"Minimal leather wallet with 4 slots.","image":"https://picsum.photos/seed/4/600/400"},
-  {"id":5,"title":"Beanie Hat","price":14.00,"desc":"Warm knit beanie, one size fits all.","image":"https://picsum.photos/seed/5/600/400"},
-  {"id":6,"title":"Sunglasses","price":49.95,"desc":"Polarized sunglasses with UV protection.","image":"https://picsum.photos/seed/6/600/400"}
+  {"id":2,"title":"Masala","price":69.00,"desc":"Organice Masala","image":"https://picsum.photos/seed/2/600/400"},
+  {"id":3,"title":"Spices","price":89.99,"desc":"Handpicked Spices","image":"https://picsum.photos/seed/3/600/400"},
+  {"id":4,"title":"Sambar Mix","price":29.50,"desc":"Ready to cook Sambar Mix","image":"https://picsum.photos/seed/4/600/400"},
+  {"id":5,"title":"Currry Mix","price":14.00,"desc":"Ready to cook Curry Mix","image":"https://picsum.photos/seed/5/600/400"},
+  {"id":6,"title":"Kabab Powder","price":49.95,"desc":"Kabab Powder with No Preservatives","image":"https://picsum.photos/seed/6/600/400"}
 ]
