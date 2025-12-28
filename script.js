@@ -190,16 +190,52 @@ function checkoutDemo(){
     alert('Your cart is empty.');
     return;
   }
-  // Simple demo checkout — show form then thank you
-  const ok = confirm('This is a demo checkout. Click OK to simulate a successful order.');
-  if(ok){
+
+  const modal = qs('#modal');
+  const body = qs('#modal-body');
+
+  body.innerHTML = `
+    <h2>Checkout</h2>
+    <form id="checkout-form" class="checkout-form">
+      <label>
+        Phone Number
+        <input type="tel" id="checkout-phone" required placeholder="Enter phone number" />
+      </label>
+
+      <label>
+        Address
+        <textarea id="checkout-address" required placeholder="Enter delivery address"></textarea>
+      </label>
+
+      <button type="submit" class="btn primary">Place Order</button>
+    </form>
+  `;
+
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden', 'false');
+
+  qs('#checkout-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const phone = qs('#checkout-phone').value.trim();
+    const address = qs('#checkout-address').value.trim();
+
+    if (!phone || !address) {
+      alert('Please fill all fields');
+      return;
+    }
+
+    // DEMO SUCCESS
     cart = {};
     saveCart();
     renderCart();
     toggleCart();
-    alert('Thank you — your demo order has been placed!');
-  }
+    closeModal();
+
+    alert('Thank you! Your demo order has been placed.');
+  });
 }
+
 
 function escapeHtml(text){
   return (''+text).replace(/[&<>\"'\/]/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;","/":"&#x2F;"})[s]);
