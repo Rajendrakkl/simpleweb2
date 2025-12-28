@@ -1,56 +1,58 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Shop - Simple Shop</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Shop - SimpleWeb</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <h1 class="logo"><a href="index.html">Simple Shop</a></h1>
-      <nav class="main-nav">
-        <a href="index.html">Home</a>
-        <a href="about.html">About Us</a>
-        <a href="shop.html">Shop</a>
-        <a href="contact.html">Contact</a>
+  <header class="header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">
+        <span class="logo">SW</span>
+        <span class="site-title">SimpleWeb</span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <button class="nav-toggle" aria-controls="primary-menu" aria-expanded="false">
+          <span class="bar" aria-hidden="true"></span>
+        </button>
+        <div id="primary-menu" class="nav-menu">
+          <a class="nav-link" href="index.html">Home</a>
+          <a class="nav-link" href="about.html">About</a>
+          <a class="nav-link active" href="shop.html">Shop</a>
+          <a class="nav-link" href="contact.html">Contact</a>
+        </div>
       </nav>
-      <div class="search-cart">
-        <input id="search" class="search" type="search" placeholder="Search products..." />
-        <button id="cart-toggle" class="cart-btn">Cart (<span id="cart-count">0</span>)</button>
-      </div>
     </div>
   </header>
 
   <main class="container">
-    <h2>Shop</h2>
-    <section id="products" class="products-grid" aria-live="polite"></section>
+    <h1>Shop</h1>
+    <p class="small">Browse our curated set of templates and components.</p>
+
+    <div class="grid" style="margin-top:1.5rem">
+      <article class="card">
+        <h3>Starter Pack</h3>
+        <p>Everything you need to start a simple marketing site.</p>
+        <div class="meta">$29</div>
+      </article>
+      <article class="card">
+        <h3>Pro Components</h3>
+        <p>Advanced cards, modals, and utility classes for apps.</p>
+        <div class="meta">$49</div>
+      </article>
+      <article class="card">
+        <h3>Theme Kit</h3>
+        <p>Prebuilt themes and color schemes to jumpstart design.</p>
+        <div class="meta">$19</div>
+      </article>
+    </div>
   </main>
 
-  <aside id="cart" class="cart-panel" aria-hidden="true">
-    <div class="cart-header">
-      <h2>Your Cart</h2>
-      <button id="close-cart" class="close">&times;</button>
-    </div>
-    <div id="cart-items" class="cart-items"></div>
-    <div class="cart-footer">
-      <div class="cart-total">Total: $<span id="cart-total">0.00</span></div>
-      <button id="checkout-btn" class="btn primary">Checkout (Demo)</button>
-      <button id="clear-cart" class="btn">Clear</button>
-    </div>
-  </aside>
-
-  <div id="modal" class="modal" aria-hidden="true">
-    <div class="modal-content">
-      <button id="modal-close" class="close">&times;</button>
-      <div id="modal-body"></div>
-    </div>
-  </div>
-
-  <footer class="site-footer">
+  <footer class="footer">
     <div class="container">
-      <small>Simple Shop — demo e‑commerce (static)</small>
+      <div class="small">© 2025 SimpleWeb — Shop</div>
     </div>
   </footer>
 
