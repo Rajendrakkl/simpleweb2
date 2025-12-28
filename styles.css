@@ -18,6 +18,12 @@ body {
   padding: 1rem;
 }
 
+a {
+  text-decoration: none;
+}
+
+
+
 /* HEADER */
 .site-header {
   background: #fff;
