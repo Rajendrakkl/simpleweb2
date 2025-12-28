@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Simple Shop - Sample Website</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <h1 class="logo">Simple Shop</h1>
+      <div class="search-cart">
+        <input id="search" class="search" type="search" placeholder="Search products..." />
+        <button id="cart-toggle" class="cart-btn">Cart (<span id="cart-count">0</span>)</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="products" class="products-grid" aria-live="polite">
+      <!-- Products injected here -->
+    </section>
+  </main>
+
+  <aside id="cart" class="cart-panel" aria-hidden="true">
+    <div class="cart-header">
+      <h2>Your Cart</h2>
+      <button id="close-cart" class="close">&times;</button>
+    </div>
+    <div id="cart-items" class="cart-items">
+      <!-- Cart items -->
+    </div>
+
+    <div class="cart-footer">
+      <div class="cart-total">Total: $<span id="cart-total">0.00</span></div>
+      <button id="checkout-btn" class="btn primary">Checkout (Demo)</button>
+      <button id="clear-cart" class="btn">Clear</button>
+    </div>
+  </aside>
+
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="modal-content">
+      <button id="modal-close" class="close">&times;</button>
+      <div id="modal-body">
+        <!-- Product detail -->
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <small>Simple Shop — demo e‑commerce (static)</small>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
