@@ -2,6 +2,9 @@
 const PRODUCTS_URL = 'products.json';
 const CART_KEY = 'sw_cart';
 
+// Configure a Razorpay Payment Link here (replace with your payment link when ready)
+const RAZORPAY_PAYMENT_LINK = 'https://rzp.io/i/your_payment_link_here';
+
 let products = [];
 let cart = {};
 
@@ -9,11 +12,17 @@ const qs = s => document.querySelector(s);
 const qsa = s => document.querySelectorAll(s);
 
 async function init(){
-  await loadProducts();
+  // Always initialise cart/UI parts that exist on every page
   loadCart();
-  renderProducts(products);
   renderCart();
-  setupListeners();
+  setupCartAndModalListeners();
+
+  // Only load products and wire product/search UI if the page has a #products container
+  if (qs('#products')) {
+    await loadProducts();
+    renderProducts(products);
+    setupSearchListener();
+  }
 }
 
 async function loadProducts(){
@@ -26,29 +35,37 @@ async function loadProducts(){
   }
 }
 
-function setupListeners(){
-  qs('#cart-toggle').addEventListener('click', toggleCart);
-  qs('#close-cart').addEventListener('click', toggleCart);
-  qs('#clear-cart').addEventListener('click', () => { cart = {}; saveCart(); renderCart(); });
-  qs('#checkout-btn').addEventListener('click', checkoutDemo);
-  qs('#search').addEventListener('input', (e)=> {
-    const q = e.target.value.trim().toLowerCase();
-    const filtered = products.filter(p => p.title.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q));
-    renderProducts(filtered);
-  });
-  qs('#modal-close').addEventListener('click', closeModal);
+function setupCartAndModalListeners(){
+  // Safe event wiring: check elements exist before adding listeners
+  const cartToggle = qs('#cart-toggle');
+  if (cartToggle) cartToggle.addEventListener('click', toggleCart);
+
+  const closeCart = qs('#close-cart');
+  if (closeCart) closeCart.addEventListener('click', toggleCart);
+
+  const clearCart = qs('#clear-cart');
+  if (clearCart) clearCart.addEventListener('click', () => { cart = {}; saveCart(); renderCart(); });
+
+  const checkoutBtn = qs('#checkout-btn');
+  if (checkoutBtn) checkoutBtn.addEventListener('click', checkoutDemo);
+
+  const modalClose = qs('#modal-close');
+  if (modalClose) modalClose.addEventListener('click', closeModal);
+
+  // Global click handler for dynamic elements (add-to-cart, qty buttons, product cards)
   document.addEventListener('click', (e) => {
     if (e.target.matches('.add-to-cart')) {
       const id = e.target.dataset.id;
       addToCart(Number(id));
     } else if (e.target.matches('.product-card') || e.target.closest('.product-card')) {
-      // open details only when clicking card (but not the button)
       const card = e.target.closest('.product-card');
       if (card && !e.target.classList.contains('add-to-cart')) {
         showProductDetail(Number(card.dataset.id));
       }
     } else if (e.target.matches('.qty-plus') || e.target.matches('.qty-minus') || e.target.matches('.remove-item')) {
-      const id = Number(e.target.closest('.cart-item').dataset.id);
+      const cartItemEl = e.target.closest('.cart-item');
+      if (!cartItemEl) return;
+      const id = Number(cartItemEl.dataset.id);
       if (e.target.matches('.qty-plus')) updateQty(id, 1);
       if (e.target.matches('.qty-minus')) updateQty(id, -1);
       if (e.target.matches('.remove-item')) { delete cart[id]; saveCart(); renderCart(); }
@@ -56,8 +73,19 @@ function setupListeners(){
   });
 }
 
+function setupSearchListener(){
+  const searchInput = qs('#search');
+  if (!searchInput) return;
+  searchInput.addEventListener('input', (e) => {
+    const q = e.target.value.trim().toLowerCase();
+    const filtered = products.filter(p => p.title.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q));
+    renderProducts(filtered);
+  });
+}
+
 function renderProducts(list){
   const wrap = qs('#products');
+  if (!wrap) return; // guard in case the element is missing
   wrap.innerHTML = '';
   if (!list.length) {
     wrap.innerHTML = '<p>No products found.</p>';
@@ -68,13 +96,13 @@ function renderProducts(list){
     el.className = 'card product-card';
     el.dataset.id = p.id;
     el.innerHTML = `
-      <img src="₹{p.image}" alt="₹{escapeHtml(p.title)}" loading="lazy" />
+      <img src="${p.image}" alt="${escapeHtml(p.title)}" loading="lazy" />
       <div class="card-body">
-        <h3>₹{escapeHtml(p.title)}</h3>
-        <p class="muted">₹{escapeHtml(p.desc)}</p>
-        <div class="price">₹₹{p.price.toFixed(2)}</div>
+        <h3>${escapeHtml(p.title)}</h3>
+        <p class="muted">${escapeHtml(p.desc)}</p>
+        <div class="price">${p.price.toFixed(2)}</div>
         <div class="card-actions">
-          <button class="btn add-to-cart" data-id="₹{p.id}">Add to cart</button>
+          <button class="btn add-to-cart" data-id="${p.id}">Add to cart</button>
           <button class="btn" data-action="view">View</button>
         </div>
       </div>`;
@@ -86,15 +114,16 @@ function showProductDetail(id){
   const p = products.find(x=>x.id===id);
   if(!p) return;
   const modal = qs('#modal');
+  if (!modal) return;
   qs('#modal-body').innerHTML = `
     <div style="display:flex;gap:1rem;flex-wrap:wrap">
-      <img src="₹{p.image}" alt="₹{escapeHtml(p.title)}" style="max-width:320px;width:100%;border-radius:8px" />
+      <img src="${p.image}" alt="${escapeHtml(p.title)}" style="max-width:320px;width:100%;border-radius:8px" />
       <div style="flex:1">
-        <h2>₹{escapeHtml(p.title)}</h2>
-        <p>₹{escapeHtml(p.desc)}</p>
-        <p style="font-weight:700;margin-top:1rem">₹₹{p.price.toFixed(2)}</p>
+        <h2>${escapeHtml(p.title)}</h2>
+        <p>${escapeHtml(p.desc)}</p>
+        <p style="font-weight:700;margin-top:1rem">${p.price.toFixed(2)}</p>
         <div style="margin-top:1rem">
-          <button class="btn primary add-to-cart" data-id="₹{p.id}">Add to cart</button>
+          <button class="btn primary add-to-cart" data-id="${p.id}">Add to cart</button>
         </div>
       </div>
     </div>`;
@@ -104,12 +133,14 @@ function showProductDetail(id){
 
 function closeModal(){
   const modal = qs('#modal');
+  if (!modal) return;
   modal.classList.remove('open');
   modal.setAttribute('aria-hidden','true');
 }
 
 function toggleCart(){
   const panel = qs('#cart');
+  if (!panel) return;
   const open = panel.classList.toggle('open');
   panel.setAttribute('aria-hidden', String(!open));
 }
@@ -128,7 +159,8 @@ function saveCart(){
 
 function updateCartCount(){
   const count = Object.values(cart).reduce((s,item)=>s+item.qty,0);
-  qs('#cart-count').textContent = count;
+  const el = qs('#cart-count');
+  if (el) el.textContent = count;
 }
 
 function addToCart(id){
@@ -138,8 +170,10 @@ function addToCart(id){
   cart[id].qty += 1;
   saveCart();
   renderCart();
-  // small visual feedback
-  qs('#cart-toggle').animate([{transform:'scale(1)'},{transform:'scale(1.05)'},{transform:'scale(1)'}],{duration:200});
+  const cartToggle = qs('#cart-toggle');
+  if (cartToggle && cartToggle.animate) {
+    cartToggle.animate([{transform:'scale(1)'},{transform:'scale(1.05)'},{transform:'scale(1)'}],{duration:200});
+  }
 }
 
 function updateQty(id, delta){
@@ -152,11 +186,13 @@ function updateQty(id, delta){
 
 function renderCart(){
   const wrap = qs('#cart-items');
+  if (!wrap) return;
   wrap.innerHTML = '';
   const items = Object.values(cart);
   if(!items.length){
     wrap.innerHTML = '<p>Your cart is empty.</p>';
-    qs('#cart-total').textContent = '0.00';
+    const totalEl = qs('#cart-total');
+    if (totalEl) totalEl.textContent = '0.00';
     return;
   }
   let total = 0;
@@ -166,15 +202,15 @@ function renderCart(){
     div.className = 'cart-item';
     div.dataset.id = it.id;
     div.innerHTML = `
-      <img src="₹{it.image}" alt="₹{escapeHtml(it.title)}" />
+      <img src="${it.image}" alt="${escapeHtml(it.title)}" />
       <div style="flex:1">
         <div style="display:flex;justify-content:space-between;align-items:center">
-          <strong>₹{escapeHtml(it.title)}</strong>
-          <span>₹₹{(it.price * it.qty).toFixed(2)}</span>
+          <strong>${escapeHtml(it.title)}</strong>
+          <span>${(it.price * it.qty).toFixed(2)}</span>
         </div>
         <div style="margin-top:.4rem;display:flex;gap:.4rem;align-items:center">
           <button class="btn qty-minus">−</button>
-          <span>₹{it.qty}</span>
+          <span>${it.qty}</span>
           <button class="btn qty-plus">+</button>
           <button class="btn remove-item" style="margin-left:auto">Remove</button>
         </div>
@@ -182,7 +218,8 @@ function renderCart(){
     `;
     wrap.appendChild(div);
   });
-  qs('#cart-total').textContent = total.toFixed(2);
+  const totalEl = qs('#cart-total');
+  if (totalEl) totalEl.textContent = total.toFixed(2);
 }
 
 function checkoutDemo(){
@@ -191,54 +228,27 @@ function checkoutDemo(){
     return;
   }
 
-  const modal = qs('#modal');
-  const body = qs('#modal-body');
+  // If a Razorpay Payment Link is configured, open it in a new tab.
+  // You'll edit RAZORPAY_PAYMENT_LINK above to your actual link later.
+  if (RAZORPAY_PAYMENT_LINK && RAZORPAY_PAYMENT_LINK.startsWith('http')) {
+    // Optionally, you could attach order info to link via query params if supported by your payment link setup.
+    window.open(RAZORPAY_PAYMENT_LINK, '_blank');
+    return;
+  }
 
-  body.innerHTML = `
-    <h2>Checkout</h2>
-    <form id="checkout-form" class="checkout-form">
-      <label>
-        Phone Number
-        <input type="tel" id="checkout-phone" required placeholder="Enter phone number" />
-      </label>
-
-      <label>
-        Address
-        <textarea id="checkout-address" required placeholder="Enter delivery address"></textarea>
-      </label>
-
-      <button type="submit" class="btn primary">Place Order</button>
-    </form>
-  `;
-
-  modal.classList.add('open');
-  modal.setAttribute('aria-hidden', 'false');
-
-  qs('#checkout-form').addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const phone = qs('#checkout-phone').value.trim();
-    const address = qs('#checkout-address').value.trim();
-
-    if (!phone || !address) {
-      alert('Please fill all fields');
-      return;
-    }
-
-    // DEMO SUCCESS
+  // Fallback demo checkout
+  const ok = confirm('This is a demo checkout. Click OK to simulate a successful order.');
+  if(ok){
     cart = {};
     saveCart();
     renderCart();
     toggleCart();
-    closeModal();
-
-    alert('Thank you! Your demo order has been placed.');
-  });
+    alert('Thank you — your demo order has been placed!');
+  }
 }
 
-
 function escapeHtml(text){
-  return (''+text).replace(/[&<>\"'\/]/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;","/":"&#x2F;"})[s]);
+  return (''+text).replace(/[&<>"]|['\/]/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;","/":"&#x2F;"})[s]);
 }
 
 init();
